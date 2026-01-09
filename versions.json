@@ -4,11 +4,11 @@
     "url": "https://eclipse-score.github.io/inc_someip_gateway/main/"
   },
   {
-    "version": "pr-3",
-    "url": "https://eclipse-score.github.io/inc_someip_gateway/pr-3/"
-  },
-  {
     "version": "pr-12",
     "url": "https://eclipse-score.github.io/inc_someip_gateway/pr-12/"
+  },
+  {
+    "version": "pr-3",
+    "url": "https://eclipse-score.github.io/inc_someip_gateway/pr-3/"
   }
 ]
