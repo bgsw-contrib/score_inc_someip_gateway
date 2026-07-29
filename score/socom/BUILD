@@ -21,7 +21,7 @@ filegroup(
 
 cc_library(
     name = "socom",
-    srcs = glob(include = ["src/**"]),
+    srcs = glob(include = ["impl/**"]),
     hdrs = [":headers"],
     defines = [
         "WITH_SOCOM_DEADLOCK_DETECTION=1",
