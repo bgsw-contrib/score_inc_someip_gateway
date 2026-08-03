@@ -26,6 +26,8 @@ cc_library(
     name = "socom",
     srcs = glob(["impl/**/*.cpp"]),
     hdrs = [":headers"],
+    strip_include_prefix = ".",
+    include_prefix = "score/socom",
     defines = [
         "WITH_SOCOM_DEADLOCK_DETECTION=1",
     ],
