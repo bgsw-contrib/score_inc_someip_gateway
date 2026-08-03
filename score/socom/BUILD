@@ -32,6 +32,8 @@ cc_library(
         "WITH_SOCOM_DEADLOCK_DETECTION=1",
     ],
     features = COMPILER_WARNING_FEATURES,
+    include_prefix = "score/socom",
+    strip_include_prefix = ".",
     visibility = ["//visibility:public"],
     deps = [
         "@score_baselibs//score/language/futurecpp",
