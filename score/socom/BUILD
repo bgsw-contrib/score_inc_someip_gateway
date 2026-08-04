@@ -18,13 +18,15 @@ filegroup(
     name = "headers",
     srcs = glob([
         "*.hpp",
-        "impl/**/*.hpp",
     ]),
 )
 
 cc_library(
     name = "socom",
-    srcs = glob(["impl/**/*.cpp"]),
+    srcs = glob([
+        "impl/**/*.cpp",
+        "impl/**/*.hpp",
+    ]),
     hdrs = [":headers"],
     defines = [
         "WITH_SOCOM_DEADLOCK_DETECTION=1",

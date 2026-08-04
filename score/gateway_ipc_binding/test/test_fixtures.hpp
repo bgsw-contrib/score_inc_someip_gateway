@@ -22,12 +22,8 @@
 #include <score/gateway_ipc_binding/gateway_ipc_binding_client.hpp>
 #include <score/gateway_ipc_binding/gateway_ipc_binding_server.hpp>
 #include <score/socom/callback_mocks.hpp>
-#include <score/socom/client_connector.hpp>
 #include <score/socom/client_connector_mock.hpp>
-#include <score/socom/error.hpp>
-#include <score/socom/runtime.hpp>
 #include <score/socom/runtime_mock.hpp>
-#include <score/socom/server_connector.hpp>
 #include <score/socom/server_connector_mock.hpp>
 #include <string>
 #include <string_view>
@@ -37,6 +33,10 @@
 #include "mocks.hpp"
 #include "score/message_passing/client_factory.h"
 #include "score/message_passing/server_factory.h"
+#include "score/socom/client_connector.hpp"
+#include "score/socom/error.hpp"
+#include "score/socom/runtime.hpp"
+#include "score/socom/server_connector.hpp"
 #include "test_constants.hpp"
 
 namespace score::gateway_ipc_binding {
