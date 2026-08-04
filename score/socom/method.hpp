@@ -11,17 +11,18 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SCORE_SOCOM_METHOD_HPP
-#define SCORE_SOCOM_METHOD_HPP
+#ifndef SCORE_SOCOM_METHOD
+#define SCORE_SOCOM_METHOD
 
 #include <cstdint>
 #include <optional>
 #include <score/move_only_function.hpp>
-#include <score/socom/error.hpp>
-#include <score/socom/payload.hpp>
-#include <score/socom/reference_token.hpp>
 #include <utility>
 #include <variant>
+
+#include "score/socom/error.hpp"
+#include "score/socom/payload.hpp"
+#include "score/socom/reference_token.hpp"
 
 namespace score::socom {
 /// \brief Alias for a method ID.
@@ -185,4 +186,4 @@ using Method_call_reply_data_opt = std::optional<Method_call_reply_data>;
 
 }  // namespace score::socom
 
-#endif  // SCORE_SOCOM_METHOD_HPP
+#endif  // SCORE_SOCOM_METHOD
