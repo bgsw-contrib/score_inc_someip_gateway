@@ -18,13 +18,15 @@ filegroup(
     name = "headers",
     srcs = glob([
         "*.hpp",
-        "impl/**/*.hpp",
     ]),
 )
 
 cc_library(
     name = "socom",
-    srcs = glob(["impl/**/*.cpp"]),
+    srcs = glob([
+        "impl/**/*.cpp",
+        "impl/**/*.hpp",
+    ]),
     hdrs = [":headers"],
     strip_include_prefix = ".",
     include_prefix = "score/socom",
