@@ -23,7 +23,6 @@ cc_library(
     ],
     visibility = [
         "//score/socom:__subpackages__",
-        "//score/socom/impl/test:__pkg__",
     ],
     deps = [
         "//score/socom",
