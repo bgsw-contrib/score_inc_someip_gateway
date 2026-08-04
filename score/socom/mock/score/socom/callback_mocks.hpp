@@ -11,8 +11,8 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SCORE_SOCOM_MOCK_SCORE_SOCOM_CALLBACK_MOCKS
-#define SCORE_SOCOM_MOCK_SCORE_SOCOM_CALLBACK_MOCKS
+#ifndef SCORE_SOCOM_CALLBACK_MOCKS_HPP
+#define SCORE_SOCOM_CALLBACK_MOCKS_HPP
 
 #include <gmock/gmock.h>
 
@@ -48,4 +48,4 @@ using Request_service_function_mock = ::testing::MockFunction<Request_service_fu
 
 }  // namespace score::socom
 
-#endif  // SCORE_SOCOM_MOCK_SCORE_SOCOM_CALLBACK_MOCKS
+#endif  // SCORE_SOCOM_CALLBACK_MOCKS_HPP
