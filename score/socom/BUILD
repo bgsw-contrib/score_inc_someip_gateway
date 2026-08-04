@@ -28,8 +28,6 @@ cc_library(
         "impl/**/*.hpp",
     ]),
     hdrs = [":headers"],
-    strip_include_prefix = ".",
-    include_prefix = "score/socom",
     defines = [
         "WITH_SOCOM_DEADLOCK_DETECTION=1",
     ],
