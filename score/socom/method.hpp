@@ -11,8 +11,8 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SCORE_SOCOM_METHOD
-#define SCORE_SOCOM_METHOD
+#ifndef SCORE_SOCOM_METHOD_HPP
+#define SCORE_SOCOM_METHOD_HPP
 
 #include <cstdint>
 #include <optional>
@@ -186,4 +186,4 @@ using Method_call_reply_data_opt = std::optional<Method_call_reply_data>;
 
 }  // namespace score::socom
 
-#endif  // SCORE_SOCOM_METHOD
+#endif  // SCORE_SOCOM_METHOD_HPP
