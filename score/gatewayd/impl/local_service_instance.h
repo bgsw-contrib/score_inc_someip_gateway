@@ -11,17 +11,17 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SRC_GATEWAYD_LOCAL_SERVICE_INSTANCE
-#define SRC_GATEWAYD_LOCAL_SERVICE_INSTANCE
+#ifndef IMPL_GATEWAYD_LOCAL_SERVICE_INSTANCE
+#define IMPL_GATEWAYD_LOCAL_SERVICE_INSTANCE
 
 #include <map>
 #include <memory>
 #include <string_view>
 #include <vector>
 
+#include "score/config/mw_someip_config_generated.h"
 #include "score/mw/com/types.h"
 #include "score/socom/server_connector.hpp"
-#include "score/config/mw_someip_config_generated.h"
 
 namespace score::socom {
 class Runtime;
@@ -102,4 +102,4 @@ class LocalServiceInstance {
 };
 }  // namespace score::someip_gateway::gatewayd
 
-#endif  // SRC_GATEWAYD_LOCAL_SERVICE_INSTANCE
+#endif  // IMPL_GATEWAYD_LOCAL_SERVICE_INSTANCE

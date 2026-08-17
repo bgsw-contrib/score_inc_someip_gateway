@@ -11,17 +11,17 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SRC_GATEWAYD_REMOTE_SERVICE_INSTANCE
-#define SRC_GATEWAYD_REMOTE_SERVICE_INSTANCE
+#ifndef IMPL_GATEWAYD_REMOTE_SERVICE_INSTANCE
+#define IMPL_GATEWAYD_REMOTE_SERVICE_INSTANCE
 
 #include <cstdint>
 #include <memory>
 #include <unordered_map>
 #include <vector>
 
+#include "score/config/mw_someip_config_generated.h"
 #include "score/mw/com/types.h"
 #include "score/socom/client_connector.hpp"
-#include "score/config/mw_someip_config_generated.h"
 
 struct score_com_serializer;
 

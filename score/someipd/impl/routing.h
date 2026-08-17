@@ -11,8 +11,8 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SRC_SOMEIPD_ROUTING
-#define SRC_SOMEIPD_ROUTING
+#ifndef IMPL_SOMEIPD_ROUTING
+#define IMPL_SOMEIPD_ROUTING
 
 #include <atomic>
 #include <functional>
@@ -20,9 +20,9 @@
 #include <thread>
 #include <vsomeip/vsomeip.hpp>
 
+#include "score/config/mw_someip_config_generated.h"
 #include "score/result/result.h"
 #include "score/someip/types.h"
-#include "score/config/mw_someip_config_generated.h"
 
 namespace score::someipd {
 
@@ -79,4 +79,4 @@ class Routing {
 
 }  // namespace score::someipd
 
-#endif  // SRC_SOMEIPD_ROUTING
+#endif  // IMPL_SOMEIPD_ROUTING

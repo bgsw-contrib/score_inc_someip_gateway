@@ -11,16 +11,16 @@
  * SPDX-License-Identifier: Apache-2.0
  ********************************************************************************/
 
-#ifndef SRC_SOMEIPD_REMOTE_NETWORK_SERVICE
-#define SRC_SOMEIPD_REMOTE_NETWORK_SERVICE
+#ifndef IMPL_SOMEIPD_REMOTE_NETWORK_SERVICE
+#define IMPL_SOMEIPD_REMOTE_NETWORK_SERVICE
 
 #include <memory>
 #include <vector>
 #include <vsomeip/vsomeip.hpp>
 
+#include "score/config/mw_someip_config_generated.h"
 #include "score/result/result.h"
 #include "score/socom/server_connector.hpp"
-#include "score/config/mw_someip_config_generated.h"
 
 namespace score::socom {
 class Runtime;
@@ -72,4 +72,4 @@ class RemoteNetworkService {
 
 }  // namespace score::someipd
 
-#endif  // SRC_SOMEIPD_REMOTE_NETWORK_SERVICE
+#endif  // IMPL_SOMEIPD_REMOTE_NETWORK_SERVICE
