@@ -266,42 +266,42 @@ void ProcessEchoRequests(EchoRequestPreSerializedProxy& request_proxy,
         return;
     }
 
-    request_proxy.echo_request_tiny_.GetNewSamples(
+    (void)request_proxy.echo_request_tiny_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestTiny(std::move(request_sample), response_skeleton,
                                          requests_processed_tiny);
         },
         MaxSamplesCount);
 
-    request_proxy.echo_request_small_.GetNewSamples(
+    (void)request_proxy.echo_request_small_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestSmall(std::move(request_sample), response_skeleton,
                                           requests_processed_small);
         },
         MaxSamplesCount);
 
-    request_proxy.echo_request_medium_.GetNewSamples(
+    (void)request_proxy.echo_request_medium_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestMedium(std::move(request_sample), response_skeleton,
                                            requests_processed_medium);
         },
         MaxSamplesCount);
 
-    request_proxy.echo_request_large_.GetNewSamples(
+    (void)request_proxy.echo_request_large_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestLarge(std::move(request_sample), response_skeleton,
                                           requests_processed_large);
         },
         MaxSamplesCount);
 
-    request_proxy.echo_request_xlarge_.GetNewSamples(
+    (void)request_proxy.echo_request_xlarge_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestXLarge(std::move(request_sample), response_skeleton,
                                            requests_processed_xlarge);
         },
         MaxSamplesCount);
 
-    request_proxy.echo_request_xxlarge_.GetNewSamples(
+    (void)request_proxy.echo_request_xxlarge_.GetNewSamples(
         [&](auto request_sample) {
             ProcessSingleEchoRequestXXLarge(std::move(request_sample), response_skeleton,
                                             requests_processed_xxlarge);
@@ -312,7 +312,7 @@ void ProcessEchoRequests(EchoRequestPreSerializedProxy& request_proxy,
 
 enum class ServerState { WaitingForClient, SettingUpHandler, ProcessingRequests };
 
-int main(int argc, const char* argv[]) {
+int main(int const argc, const char* const argv[]) {
     std::signal(SIGINT, SigTermHandlerFunction);
     std::signal(SIGTERM, SigTermHandlerFunction);
 
@@ -321,7 +321,8 @@ int main(int argc, const char* argv[]) {
 
     std::cout << "Starting Echo Server..." << std::endl;
 
-    score::mw::com::runtime::InitializeRuntime(argc, argv);
+    score::mw::com::runtime::InitializeRuntime(
+        echo_service::utils::create_command_line_arguments(argc, argv));
 
     auto response_skeleton_result = EchoResponsePreSerializedSkeleton::Create(
         score::mw::com::InstanceSpecifier::Create(std::string{EchoResponseInstanceSpecifier})
@@ -370,12 +371,12 @@ int main(int argc, const char* argv[]) {
             }
             case ServerState::SettingUpHandler: {
                 if (request_proxy.has_value()) {
-                    request_proxy->echo_request_tiny_.Subscribe(MaxSamplesCount);
-                    request_proxy->echo_request_small_.Subscribe(MaxSamplesCount);
-                    request_proxy->echo_request_medium_.Subscribe(MaxSamplesCount);
-                    request_proxy->echo_request_large_.Subscribe(MaxSamplesCount);
-                    request_proxy->echo_request_xlarge_.Subscribe(MaxSamplesCount);
-                    request_proxy->echo_request_xxlarge_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_tiny_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_small_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_medium_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_large_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_xlarge_.Subscribe(MaxSamplesCount);
+                    (void)request_proxy->echo_request_xxlarge_.Subscribe(MaxSamplesCount);
 
                     std::cout << "All request handlers setup complete" << std::endl;
                     current_state = ServerState::ProcessingRequests;

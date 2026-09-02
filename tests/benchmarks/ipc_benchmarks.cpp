@@ -143,12 +143,12 @@ class BenchmarkFixture {
         }
 
         std::cout << "Subscribing to echo_response service events..." << std::endl;
-        response_proxy_->echo_response_tiny_.Subscribe(MaxSamplesCount);
-        response_proxy_->echo_response_small_.Subscribe(MaxSamplesCount);
-        response_proxy_->echo_response_medium_.Subscribe(MaxSamplesCount);
-        response_proxy_->echo_response_large_.Subscribe(MaxSamplesCount);
-        response_proxy_->echo_response_xlarge_.Subscribe(MaxSamplesCount);
-        response_proxy_->echo_response_xxlarge_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_tiny_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_small_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_medium_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_large_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_xlarge_.Subscribe(MaxSamplesCount);
+        (void)response_proxy_->echo_response_xxlarge_.Subscribe(MaxSamplesCount);
 
         std::cout << "Creating and offering echo_request service..." << std::endl;
         auto request_skeleton_result = EchoRequestPreSerializedSkeleton::Create(
@@ -179,12 +179,12 @@ class BenchmarkFixture {
         }
 
         if (response_proxy_.has_value()) {
-            response_proxy_->echo_response_tiny_.UnsetReceiveHandler();
-            response_proxy_->echo_response_small_.UnsetReceiveHandler();
-            response_proxy_->echo_response_medium_.UnsetReceiveHandler();
-            response_proxy_->echo_response_large_.UnsetReceiveHandler();
-            response_proxy_->echo_response_xlarge_.UnsetReceiveHandler();
-            response_proxy_->echo_response_xxlarge_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_tiny_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_small_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_medium_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_large_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_xlarge_.UnsetReceiveHandler();
+            (void)response_proxy_->echo_response_xxlarge_.UnsetReceiveHandler();
             response_proxy_->echo_response_tiny_.Unsubscribe();
             response_proxy_->echo_response_small_.Unsubscribe();
             response_proxy_->echo_response_medium_.Unsubscribe();
@@ -258,7 +258,7 @@ class BenchmarkFixture {
             bool found = false;
             std::chrono::high_resolution_clock::time_point receive_time;
 
-            response_proxy_->echo_response_tiny_.GetNewSamples(
+            (void)response_proxy_->echo_response_tiny_.GetNewSamples(
                 [&](auto pre_serialized_response_sample) {
                     static_assert(
                         sizeof(EchoResponseTiny) <=
@@ -300,7 +300,7 @@ class BenchmarkFixture {
         request->payload_size = size;
         request->actual_size = actual_size;
         utils::FillTestPayload(request->payload, actual_size, sequence_id);
-        request_event.Send(std::move(pre_serialized_request));
+        (void)request_event.Send(std::move(pre_serialized_request));
     }
 
     // Helper method to select the correct event based on payload size
@@ -345,7 +345,7 @@ class BenchmarkFixture {
             return;
         }
 
-        response_event.GetNewSamples(
+        (void)response_event.GetNewSamples(
             [this](auto pre_serialized_response_sample) {
                 if (g_stop_token.stop_requested()) {
                     return;
@@ -551,7 +551,8 @@ int main(int argc, char** argv) {
     const char* score_args[] = {"ipc_benchmarks", "-service_instance_manifest",
                                 "tests/benchmarks/config/benchmark_mw_com_config.json"};
     int score_argc = sizeof(score_args) / sizeof(score_args[0]);
-    score::mw::com::runtime::InitializeRuntime(score_argc, score_args);
+    score::mw::com::runtime::InitializeRuntime(
+        echo_service::utils::create_command_line_arguments(score_argc, score_args));
 
     benchmark::Initialize(&argc, argv);
 
