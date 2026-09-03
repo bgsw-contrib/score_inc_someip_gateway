@@ -11,8 +11,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # *******************************************************************************
 
-Host slave
-    ProxyCommand socat - TCP4:slave:%p,bind=:22,reuseaddr
-    User root
-    IdentityFile /commonapi_main/lxc-config/.ssh/mgc_lxc/rsa_key_file.pub
-    Port 22
+"""Runs the Google Benchmark IPC suite through both SOME/IP gateway nodes."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(".").absolute()))
+
+from tests.benchmarks.e2e_benchmark_runner import run_e2e_benchmarks  # noqa: E402
+
+
+def test_e2e_benchmarks() -> None:
+    """Benchmark a request/response pair that must traverse the SOME/IP link."""
+    run_e2e_benchmarks(artifact_subdir="e2e_benchmarks")
