@@ -102,11 +102,15 @@ Result<std::unique_ptr<RemoteServiceInstance>> RemoteServiceInstance::Create(
         std::move(service_instance_config), std::move(service_type_config), std::move(ipc_skeleton),
         nullptr, std::move(event_contexts)));
 
+    // Use a shared promise to synchronize connector publication with callback
+    auto connector_ready = std::make_shared<std::promise<socom::Client_connector*>>();
+    auto connector_future = connector_ready->get_future().share();
+
     auto connector_result = socom_runtime.make_client_connector(
         client_config, inst,
         {
             .on_service_state_change =
-                [instance_ptr = instance.get()](socom::Client_connector const&,
+                [instance_ptr = instance.get(), connector_future](socom::Client_connector const&,
                                                 socom::Service_state state,
                                                 socom::Server_service_interface_definition const&) {
                     std::cout << "[gatewayd] RemoteServiceInstance - client_connector "
@@ -115,12 +119,14 @@ Result<std::unique_ptr<RemoteServiceInstance>> RemoteServiceInstance::Create(
                     if (state != socom::Service_state::available) {
                         return;
                     }
+                    // Wait for connector to be published before accessing
+                    auto* connector = connector_future.get();
                     std::cout << "[gatewayd] RemoteServiceInstance - client_connector "
                                  "on_service_state_change: service is now available, subscribing "
                                  "to events\n";
                     for (std::size_t i = 0;
                          i < instance_ptr->service_type_config_->events()->size(); ++i) {
-                        (void)instance_ptr->client_connector_->subscribe_event(
+                        connector->subscribe_event(
                             static_cast<socom::Event_id>(i), socom::Event_mode::update);
                     }
                 },
@@ -149,6 +155,9 @@ Result<std::unique_ptr<RemoteServiceInstance>> RemoteServiceInstance::Create(
         return MakeUnexpected(socom::Error::runtime_error_request_rejected);
     }
     instance->client_connector_ = std::move(connector_result).value();
+
+    // Signal to waiting callback that connector is published
+    connector_ready->set_value(instance->client_connector_.get());
 
     return instance;
 }
