@@ -50,5 +50,9 @@
   {
     "version": "pr-38",
     "url": "https://eclipse-score.github.io/inc_someip_gateway/pr-38/"
+  },
+  {
+    "version": "pr-18",
+    "url": "https://bgsw-contrib.github.io/score_inc_someip_gateway/pr-18/"
   }
 ]
