@@ -125,8 +125,6 @@ class Event_transmission_benchmark_context final {
     }
 
    private:
-    static constexpr std::uint32_t k_slot_count = 64U;
-
     score::socom::Runtime::Uptr runtime_server_;
     score::socom::Runtime::Uptr runtime_client_;
 
@@ -159,15 +157,22 @@ class Event_transmission_benchmark_context final {
 
     void create_gateway_pair() {
         auto services = [this](mw_com::Role role) {
-            return mw_com::Service_configs{mw_com::Service_config{interface_,
-                                                                  instance_,
-                                                                  "bridged_benchmark/event",
-                                                                  role,
-                                                                  {{"event", payload_size_}},
-                                                                  k_slot_count}};
+            return mw_com::Service_configs{
+                mw_com::Service_config{interface_,
+                                       instance_,
+                                       "bridged_benchmark/event",
+                                       6451U,
+                                       1U,
+                                       role,
+                                       {{"event", mw_com::Mw_com_event_id{1U}, payload_size_}},
+                                       mw_com::kNumber_of_sample_slots}};
         };
-        gateway_server_ = mw_com::create_server(*runtime_server_, "benchmark/someipd",
-                                                services(mw_com::Role::consumer));
+        gateway_server_ = mw_com::create_server(
+            *runtime_server_, "benchmark/someipd",
+            [services](score::cpp::span<std::byte const>,
+                       mw_com::Add_bridged_services const& add_bridged_services) {
+                return add_bridged_services(services(mw_com::Role::consumer));
+            });
         SCORE_LANGUAGE_FUTURECPP_ASSERT(gateway_server_);
 
         gateway_client_ = mw_com::create_client(*runtime_client_, "benchmark/someipd",
